@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My videos</title>
+    <style>
+        body{
+            background-color: blue;
+        }
+        #myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+    </style>
+</head>
+<body>
+    <div class="thumbnail" style="padding-left: 120px;">
+        <img src="Retro Pack - Cambit Creates.jpg">
+    </div>
+        <video id="myVideo">
+            <source src="videos/abstraction.mp4" type="video/mp4">
+        </video>
+    <div class="content">
+        <h1>Heading</h1>
+        <p>Loren ipsum</p>
+        <button id="myBtn" onclick="myFunction()">Pouse</button>
+    </div>
+    <script>
+        //Get the videio
+        var video=document.getElementById("myVideo");
+        //Get the button
+        var btn = document.getElementById("myBtn");
+        //Pouse and play the video,and change the button text
+        function myFunction(){
+            if(video.paused){
+                video.play();
+                btn.innerHTML="Pause";
+            }
+           
+            else{
+                video.pause();
+                btn.innerHTML="play";
+            }
+        }
+    </script>
+
+    <!-- <div class="myvideos"  >
+        <h1 style="text-align: center;">the videos of the java language in the tutorial is the below</h1>
+        <h2 style="text-align: center;">abstraction in java</h2>
+     
+           
+        <video src="videos/abstraction.mp4" style="margin-left: 120px;">Abstraction in java
+            <span> <i class='fas fa-play' style='font-size:48px;color:red'><img src="video.svg"></i></span>
+        </video>
+        
+        <h2 style="text-align: center;">acess and modifier in java</h2>
+        <video src="videos/Access andmodifiers.mp4" style="margin-left: 120px;">Access and modifier in java</video>
+    </div>  -->
+    <!-- INSERT INTO `my_com` (`serial_No`, `Name`, `gender`, `phone_no`, `email`, `subject`, `age`) VALUES ('1', 'amitkumardubey', 'male', '9782334343', 'amitkumardubey744@gmail.com', 'computer-science', '18'); -->
+    
+</body>
+</html>
