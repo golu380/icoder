@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
     crossorigin="anonymous"></script>
-<form class="row g-3 needs-validation" action="index.php" method="POST">
+<form class="row g-3 needs-validation" action="index.php" method="POST" id="contactform">
     <div class="col-md-4 position-relative">
       <label for="validationTooltip01" class="form-label">First name</label>
       <input type="text" class="form-control" id="validationTooltip01" value="Mark" required name="firstname">
@@ -71,6 +71,54 @@
       <button class="btn btn-primary" type="submit">Submit form</button>
     </div>
   </form>
+  <script src=
+  "https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+      </script>
+
+      <script>
+        const firebaseConfig = {
+  apiKey: "AIzaSyAgsd-sFpnyMXeHmHAvbAU2UUT7uwmtY1Y",
+  authDomain: "contacts-bb45b.firebaseapp.com",
+  projectId: "contacts-bb45b",
+  storageBucket: "contacts-bb45b.appspot.com",
+  messagingSenderId: "272523003540",
+  appId: "1:272523003540:web:cb6d5fc176034202cf9681",
+  measurementId: "G-3VMJ7H10Q7"
+};
+
+firebase.initializeApp(firebaseConfig);
+ 
+ var messagesRef = firebase.database()
+     .ref('Collected Data');
+  
+ document.getElementById('contactForm')
+     .addEventListener('submit', submitForm);
+
+ function submitForm(e) {
+     e.preventDefault();
+
+     // Get values
+     var name = getInputVal('name');
+     var email = getInputVal('email');
+
+     saveMessage(name, email);
+     document.getElementById('contactForm').reset();
+ }
+
+ // Function to get get form values
+ function getInputVal(id) {
+     return document.getElementById(id).value;
+ }
+
+ // Save message to firebase
+ function saveMessage(name, email) {
+     var newMessageRef = messagesRef.push();
+     newMessageRef.set({
+         name: name,
+         email: email,
+     });
+ }
+      </script>
 
 </body>
 </html>
