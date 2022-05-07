@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Only for testing :</h1>
+    <label for="email">Enter email here</label>
+
+    <input type="email" id="email" placeholder="enter please">
+    <label for="password">password should be here`</label>
+    <input type="password" id="password" placeholder="enter password please:">
+
+    <button id="button">subit</button>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
+    <script src=
+    "https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
+        </script>
+
+    <script>
+        const firebaseConfig = {
+ apiKey: "AIzaSyAgsd-sFpnyMXeHmHAvbAU2UUT7uwmtY1Y",
+ authDomain: "contacts-bb45b.firebaseapp.com",
+ databaseURL: "https://contacts-bb45b-default-rtdb.firebaseio.com",
+ projectId: "contacts-bb45b",
+ storageBucket: "contacts-bb45b.appspot.com",
+ messagingSenderId: "272523003540",
+ appId: "1:272523003540:web:cb6d5fc176034202cf9681",
+ measurementId: "G-3VMJ7H10Q7"
+};
+
+       firebase.initializeApp(firebaseConfig);
+
+       var messagesRef = firebase.database()
+           .ref('Collected for check Data');
+        
+       document.getElementById('button')
+           .addEventListener('click', submitForm);
+
+       function submitForm(e) {
+           e.preventDefault();
+
+           // Get values
+           
+        //    var name = getInputVal('email');
+           var email = getInputVal('email');
+           var phoneNumber = getInputVal('password');
+
+           saveMessage(name, email,phoneNumber);
+        //    document.getElementById('resister-form').reset();
+       }
+
+       // Function to get get form values
+       function getInputVal(id) {
+           return document.getElementById(id).value;
+       }
+
+       // Save message to firebase
+       function saveMessage(name, email,phoneNumber) {
+           var newMessageRef = messagesRef.push();
+           newMessageRef.set({
+               name: name,
+               email: email,
+            //    phoneNumber:phoneNumber,
+           });
+       }
+   </script>
+
+</body>
+</html>

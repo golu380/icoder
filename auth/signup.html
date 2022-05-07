@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,12 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
+   
+   
+  
+
 </head>
+
 <body>
 
     <div class="main">
@@ -22,70 +28,104 @@
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
+                        <form class="register-form" id="register-form">
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                                <input type="text" name="name" id="t1" placeholder="Your Name" />
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                <input type="email" name="email" id="t2" placeholder="Your Email" />
+                            </div>
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-account"></i></label>
+                                <input type="text" name="username" id="t3" placeholder="Your user name:" />
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
+                                <input type="password" name="pass" id="t4" placeholder="Password" />
                             </div>
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <input type="password" name="re_pass" id="t5" placeholder="Repeat your password" />
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                            </div>
+                            </div> -->
                             <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                <input id="signupbutton" class="form-submit" value="SignUp"  />
                             </div>
                         </form>
                     </div>
                     <div class="signup-image">
                         <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">I am already member</a>
+                        <a href="signin.html" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sing in  Form -->
-       
+
+
 
     </div>
+    <!-- <script type="module/script" src="https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js"></script>
+    <script type="module/script" src="https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js"></script>
+    <script type="module/script" src="https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js"></script> -->
+    <script type="module">
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js";
+        import {getDatabase,set,ref} from "https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js";
+        import {getAuth,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js"
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPxh7lV0Scm_CjGMHwdDgfgqpyUpHjrVE",
+            authDomain: "users-d48a7.firebaseapp.com",
+            databaseURL: "https://users-d48a7-default-rtdb.firebaseio.com",
+            projectId: "users-d48a7",
+            storageBucket: "users-d48a7.appspot.com",
+            messagingSenderId: "765546780232",
+            appId: "1:765546780232:web:4768c8ba986fcfe32eea7d",
+            measurementId: "G-C7YWHVJ1RF"
+          };
+          const app = initializeApp(firebaseConfig);
+        
+    
+    const  database = getDatabase(app);
+    const auth = getAuth();
+    
+    function RegisterUser(){
+        var fname = document.getElementById('t1').value;
+        var email = document.getElementById('t2').value;
+        var username = document.getElementById('t3').value;
+        var password = document.getElementById('t4').value;
+        var cpassword = document.getElementById('t5').value;
+        createUserWithEmailAndPassword(auth,email,password).then((userCredentail)=>{
+    
+            const user = userCredentail.user;
+                set(ref(database,'users/'+user.uid),{
+                    fullname : fname,
+                    email:email,
+                    username:username
+                })
 
-    <!-- JS -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src=
-    "https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
-        </script>
-<script>
-    const firebaseConfig = {
-  apiKey: "AIzaSyAgsd-sFpnyMXeHmHAvbAU2UUT7uwmtY1Y",
-  authDomain: "contacts-bb45b.firebaseapp.com",
-  databaseURL: "https://contacts-bb45b-default-rtdb.firebaseio.com",
-  projectId: "contacts-bb45b",
-  storageBucket: "contacts-bb45b.appspot.com",
-  messagingSenderId: "272523003540",
-  appId: "1:272523003540:web:cb6d5fc176034202cf9681",
-  measurementId: "G-3VMJ7H10Q7"
-};
+            alert('user created');
+            window.location.href = "http://www.w3schools.com";
+        }).catch((error)=>{
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+        })
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-var messagesRef = firebase.database().ref('Collected Data');
-document.getElementById('resister-form')
-    .addEventListener('submit',submitForm)
-</script>
+       
+    }
+    document.getElementById('signupbutton').addEventListener('click',RegisterUser)
+    
+    
+    
+    
+    </script>
+
+</body>
 
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
