@@ -88,9 +88,8 @@
             measurementId: "G-C7YWHVJ1RF"
           };
           const app = initializeApp(firebaseConfig);
-        
-    
-    const  database = getDatabase(app);
+
+             const  database = getDatabase(app);
     const auth = getAuth();
     
     function RegisterUser(){
@@ -109,7 +108,7 @@
                 })
 
             alert('user created');
-            window.location.href = "http://www.w3schools.com";
+            window.location.href = "/";
         }).catch((error)=>{
             const errorCode = error.code;
             const errorMessage = error.message;

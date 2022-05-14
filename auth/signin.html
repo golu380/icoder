@@ -94,6 +94,7 @@
                 last_login : dt
             })
             alert('User loged in!')
+            window.location.href = "/";
             state();
         }).catch((error)=>{
             const errorCode = error.code;
